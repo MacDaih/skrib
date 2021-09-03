@@ -7,7 +7,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/MacDaih/skrib"
+	"skrib"
 )
 
 type exiter func(code int)
