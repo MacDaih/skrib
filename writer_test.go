@@ -8,9 +8,10 @@ import (
 	"os"
 	"reflect"
 	"regexp"
-	"skrib"
 	"strings"
 	"testing"
+
+	"github.com/MacDaih/skrib"
 )
 
 const (

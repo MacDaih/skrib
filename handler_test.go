@@ -5,8 +5,9 @@ import (
 	"errors"
 	"log"
 	"os"
-	"skrib"
 	"testing"
+
+	"github.com/MacDaih/skrib"
 )
 
 type exiter func(code int)
