@@ -1,4 +1,4 @@
-package skrib_test
+package skrib
 
 import (
 	"bytes"
@@ -10,8 +10,6 @@ import (
 	"regexp"
 	"strings"
 	"testing"
-
-	"github.com/MacDaih/skrib"
 )
 
 const (
@@ -19,11 +17,11 @@ const (
 )
 
 func TestWrite(t *testing.T) {
-	var batch []skrib.Log = []skrib.Log{
-		{LogType: skrib.ERROR, Message: fmt.Sprintf("%v", errors.New("Some kind of ERROR"))},
-		{LogType: skrib.SUCCESS, Message: fmt.Sprintf("%v", errors.New("Some kind of SUCCESS"))},
-		{LogType: skrib.WARNING, Message: fmt.Sprintf("%v", errors.New("Some kind of WARNING"))},
-		{LogType: skrib.INFO, Message: fmt.Sprintf("%v", errors.New("Some kind of INFO"))},
+	var batch []Log = []Log{
+		{LogType: ERROR, Message: fmt.Sprintf("%v", errors.New("Some kind of ERROR"))},
+		{LogType: SUCCESS, Message: fmt.Sprintf("%v", errors.New("Some kind of SUCCESS"))},
+		{LogType: WARNING, Message: fmt.Sprintf("%v", errors.New("Some kind of WARNING"))},
+		{LogType: INFO, Message: fmt.Sprintf("%v", errors.New("Some kind of INFO"))},
 	}
 
 	for _, j := range batch {

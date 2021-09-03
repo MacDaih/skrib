@@ -1,4 +1,4 @@
-package skrib_test
+package skrib
 
 import (
 	"bytes"
@@ -6,15 +6,13 @@ import (
 	"log"
 	"os"
 	"testing"
-
-	"github.com/MacDaih/skrib"
 )
 
 type exiter func(code int)
 
 func TestHandleError(t *testing.T) {
 	e := errors.New("Some error occured")
-	skrib.HandleError(e, false)
+	HandleError(e, false)
 }
 
 func TestHandleLog(t *testing.T) {
@@ -29,7 +27,7 @@ func TestHandleLog(t *testing.T) {
 		defer func() {
 			log.SetOutput(os.Stdout)
 		}()
-		skrib.HandleLog(v, k)
+		HandleLog(v, k)
 		if buf.Bytes() == nil {
 			t.Fail()
 		}
