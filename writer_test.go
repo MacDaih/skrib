@@ -11,7 +11,7 @@ import (
 	"strings"
 	"testing"
 
-	"skrib"
+	"github.com/MacDaih/skrib"
 )
 
 const (
