@@ -20,7 +20,7 @@ func (l Level) String() string {
 		return "error"
 	case DEBUG:
 		return "debug"
-	case FATAL:
+	default:
 		return "fatal"
 	}
 }
