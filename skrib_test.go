@@ -10,9 +10,9 @@ import (
 
 var (
 	message = "test_message"
-	fields  = map[string]interface{}{
+	fields  = logdata{
 		"field_one": "field one as string",
-		"field_two": 0.10,
+		"field_two": 0.1,
 	}
 )
 
@@ -20,11 +20,14 @@ func TestBaseCase(t *testing.T) {
 	r, w := io.Pipe()
 	s := NewSkrib(w, 0)
 
+	var lvl Level = INFO
 	p := payload{
+		Lvl:       lvl.String(),
 		Timestamp: time.Now().UTC(),
 		Msg:       message,
 		Fields:    fields,
 	}
+
 	go func(s Skrib) {
 		for {
 			s.Log(INFO, message, fields)

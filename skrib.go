@@ -8,34 +8,13 @@ import (
 )
 
 type payload struct {
+	Lvl       string                 `json:"level"`
 	Timestamp time.Time              `json:"timestamp"`
 	Msg       string                 `json:"message"`
 	Fields    map[string]interface{} `json:"payload"`
 }
 
-type errorfield struct {
-	head string
-	err  error
-}
-
-type infofield struct {
-	head string
-	info string
-}
-
-func InfoField(head string, info string) infofield {
-	return infofield{
-		head: head,
-		info: info,
-	}
-}
-
-func Err(head string, err error) errorfield {
-	return errorfield{
-		head: head,
-		err:  err,
-	}
-}
+type logdata map[string]interface{}
 
 type Skrib struct {
 	logLevel Level
@@ -49,25 +28,19 @@ func NewSkrib(w io.Writer, lvl Level) Skrib {
 	}
 }
 
-func (s *Skrib) Log(level Level, msg string, args ...interface{}) {
+func (s *Skrib) SetLevel(lvl Level) {
+	s.logLevel = lvl
+}
+
+func (s *Skrib) Log(level Level, msg string, args logdata) {
 	if level < s.logLevel {
 		return
 	}
 	m := payload{
+		Lvl:       level.String(),
 		Timestamp: time.Now().UTC(),
 		Msg:       msg,
-		Fields:    make(map[string]interface{}),
-	}
-
-	for _, v := range args {
-		switch t := v.(type) {
-		case infofield:
-			m.Fields[t.head] = t.info
-		case errorfield:
-			m.Fields[t.head] = t.err.Error()
-		default:
-			m.Fields[level.String()] = v
-		}
+		Fields:    args,
 	}
 
 	json.NewEncoder(s.out).Encode(m)
